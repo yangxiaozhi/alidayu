@@ -1,0 +1,20 @@
+{
+    "name": "lelite/alidayu",
+    "description": "The Lelite Alidayu SMS package for Laravel5",
+    "license": "MIT",
+    "homepage": "http://lelite.cn",
+    "authors": [
+        {
+            "name": "Lelite",
+            "email": "lelite@aliyun.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lelite\\Alidayu\\":"src/"
+        }
+    }
+}
