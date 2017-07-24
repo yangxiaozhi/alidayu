@@ -3,14 +3,27 @@
 
 阿里大于Laravel包，用于发送短信验证码
 
-## 安装与配置
+## 安装
 
-在终端用composer命令安装:
+方法一：运行命令
 
     composer require lelite/alidayu
 
+方法二：
+在`composer.json`中添加`"lelite/alidayu": "^1.0"`
+```
+"require": {
+    //...
+    "lelite/alidayu": "^1.0"
+}
+```
+然后composer更新依赖
 
-然后在`config/app.php`中添加服务者提供者`Lelite\Alidayu\AlidayuServiceProvider`
+    composer update
+
+##  配置
+
+在`config/app.php`中添加`Lelite\Alidayu\AlidayuServiceProvider`服务提供者
 
 ```php
 'providers' => [
