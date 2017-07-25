@@ -50,7 +50,11 @@ class Sms implements SmsContract
 
       $signature = $signature ?: $this->signature;
       $template = $template ?: $this->template;
-      
+      // 修复JSON参数不合法，数字转字符串，
+      array_walk($param, function($value,$key) use(&$param){
+          $param[$key] = (string)$value;
+      });
+
       $client = new TopClient;
       $client ->format = "json";
       $client ->appkey = $this->appkey ;
