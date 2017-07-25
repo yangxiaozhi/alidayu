@@ -44,13 +44,15 @@
 ```
 php artisan vendor:publish --tag=alidayu
 ```
-发布配置文件alidayu.php发布到项目配置目录中,并根据自己的appkey和secret设置
+发布配置文件alidayu.php发布到项目配置目录中,并根据自己的appkey、secret、签名和模板设置
 ```php
 <?php
     return [
       'appkey' =>env('ALIDAYU_APPKEY','12345678'),
       'secretkey'=>env('ALIDAYU_SECRETKEY','99a1234567ce455202cd1c0e65ea867k'),
-      'devmode' =>true  //是否处于开发模式
+      'signature' => env('ALIDAYU_SIGNATURE','阿里大于'),  // 签名
+      'template' => env('ALIDAYU_TEMPLATE','SMS_11480115'),    // 模板
+      'dev' =>true  //是否处于开发模式
     ];
 ```
 
@@ -65,6 +67,10 @@ public function somefun()
       'code'=>'168168'
     ];
 
+    //默认用配置文件中的签名"阿里大于"和模板"SMS_11480115"
+    \Alidayu::send('13800138000',$prams);
+
+    //使用其它签名"小乐科技"和模板"SMS_78680168"
     \Alidayu::send('13800138000',$prams,'小乐科技','SMS_78680168');
 
 }

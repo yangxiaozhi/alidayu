@@ -11,11 +11,15 @@ class Sms implements SmsContract
 
   public $appkey;
   public $secretkey;
+  public $signature;
+  public $template;
 
   function __construct()
   {
       $this->appkey = config('alidayu.appkey');
       $this->secretkey = config('alidayu.secretkey');
+      $this->signature = config('alidayu.signature');
+      $this->template = config('alidayu.template');
       /**
        * 定义常量开始
        */
@@ -36,14 +40,17 @@ class Sms implements SmsContract
        */
       if (!defined("TOP_SDK_DEV_MODE"))
       {
-      	define("TOP_SDK_DEV_MODE", config('alidayu.devmode'));
+      	define("TOP_SDK_DEV_MODE", config('alidayu.dev'));
       }
 
   }
 
-  public function send($RecNum,$Param,$SignName,$TemplateCode,$extend='')
+  public function send($mobile,$param,$signature=null,$template=null,$extend='')
   {
 
+      $signature = $signature ?: $this->signature;
+      $template = $template ?: $this->template;
+      
       $client = new TopClient;
       $client ->format = "json";
       $client ->appkey = $this->appkey ;
@@ -51,11 +58,12 @@ class Sms implements SmsContract
       $request = new AlibabaAliqinFcSmsNumSendRequest;
       $request ->setExtend($extend);
       $request ->setSmsType( "normal" );
-      $request ->setSmsFreeSignName($SignName);
-      $request ->setSmsParam(json_encode($Param));
-      $request ->setRecNum($RecNum);
-      $request ->setSmsTemplateCode($TemplateCode);
+      $request ->setSmsFreeSignName($signature);
+      $request ->setSmsParam(json_encode($param,JSON_UNESCAPED_UNICODE));
+      $request ->setRecNum($mobile);
+      $request ->setSmsTemplateCode($template);
       $respose = $client ->execute( $request );
+
       return $respose;
 
   }
