@@ -2,6 +2,8 @@
 
 namespace Lelite\Alidayu\Sdk;
 
+use Exception;
+
 class TopClient
 {
 	public $appkey;
