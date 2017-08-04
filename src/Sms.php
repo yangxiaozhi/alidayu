@@ -45,11 +45,11 @@ class Sms implements SmsContract
 
   }
 
-  public function send($mobile,$param,$signature=null,$template=null,$extend='')
+  public function send($mobile,$param,$template=null,$signature=null,$extend='')
   {
-
-      $signature = $signature ?: $this->signature;
+    
       $template = $template ?: $this->template;
+      $signature = $signature ?: $this->signature;
       // 修复JSON参数不合法，数字转字符串，
       array_walk($param, function($value,$key) use(&$param){
           $param[$key] = (string)$value;

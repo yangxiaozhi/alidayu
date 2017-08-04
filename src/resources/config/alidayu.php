@@ -13,7 +13,7 @@ return [
   'appkey' =>env('ALIDAYU_APPKEY',null),
   'secretkey'=>env('ALIDAYU_SECRETKEY',null),
   'signature' => env('ALIDAYU_SIGNATURE',null),  // 签名
-  'template' => env('ALIDAYU_TEMPLATE',null),    // 模板
+  'template' => env('ALIDAYU_TEMPLATE','SMS_71590145'),    // 模板
   'dev' =>true  //是否处于开发模式
 
 ];
